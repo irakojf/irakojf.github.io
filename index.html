@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shapeshift</title>
+    <style>
+        :root {
+            --background: #ffffff;
+            --text: #1a1a1a;
+            --link: #0066cc;
+        }
+
+        [data-theme="dark"] {
+            --background: #1a1a1a;
+            --text: #e0e0e0;
+            --link: #66b3ff;
+        }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        header {
+            border-bottom: 1px solid var(--text);
+            margin-bottom: 2em;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            margin: 1em 0;
+        }
+
+        nav a {
+            margin-right: 1em;
+        }
+
+        a {
+            color: var(--link);
+        }
+
+        article {
+            margin-bottom: 2em;
+        }
+
+        .date {
+            color: var(--text);
+            font-style: italic;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1em;
+            right: 1em;
+            padding: 0.5em 1em;
+            background: var(--text);
+            color: var(--background);
+            border: none;
+            cursor: pointer;
+            font-family: "Times New Roman", Times, serif;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+        <span class="light-text">Dark</span>
+        <span class="dark-text" style="display:none">Light</span>
+    </button>
+    
+    <header>
+        <h1>Shapeshift</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="https://linkedin.com/in/koira">LinkedIn</a>
+            <a href="https://calendly.com/irako/25min">Calendly</a>
+        </nav>
+    </header>
+
+    <main>
+        <article>
+            <h2>Article Title</h2>
+            <div class="date">December 28, 2024</div>
+            <p>Your article content goes here. This template maintains readability while being minimal.</p>
+        </article>
+
+        <article>
+            <h2>Another Article</h2>
+            <div class="date">December 27, 2024</div>
+            <p>More content here. The layout is clean and focused on content.</p>
+        </article>
+    </main>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const lightText = document.querySelector('.light-text');
+            const darkText = document.querySelector('.dark-text');
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            lightText.style.display = newTheme === 'dark' ? 'none' : 'inline';
+            darkText.style.display = newTheme === 'dark' ? 'inline' : 'none';
+        }
+
+        // Initialize theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.querySelector('.light-text').style.display = savedTheme === 'dark' ? 'none' : 'inline';
+        document.querySelector('.dark-text').style.display = savedTheme === 'dark' ? 'inline' : 'none';
+    </script>
+</body>
+</html>
